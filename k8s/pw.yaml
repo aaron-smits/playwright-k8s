@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pw
+  labels:
+    app: pw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pw
+  template:
+    metadata:
+      labels:
+        app: pw
+    spec:
+      containers:
+      - name: pw
+        image: aaronsmits/pw-k8s:latest
