@@ -1,19 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: pw
-  labels:
-    app: pw
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: pw
+  completions: 5
+  parallelism: 5
+  completionMode: Indexed
   template:
-    metadata:
-      labels:
-        app: pw
     spec:
       containers:
-      - name: pw
+      - name: pw-worker
         image: aaronsmits/pw-k8s:latest
+        command:
+        - "bash"
+        - "-c"
+        - |
+          shard=$((JOB_COMPLETION_INDEX+1))
+          npx playwright test--workers=1 --repeat-each=10
+      restartPolicy: Never

@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pw-test-$INDEX
+  labels:
+    jobgroup: pw-tests
+spec:
+  ttlSecondsAfterFinished: 10
+  template:
+    metadata:
+      name: pw-test-$INDEX
+      labels:
+        jobgroup: pw-tests
+    spec:
+      containers:
+      - name: pw-worker
+        image: aaronsmits/pw-k8s:latest
+        command: 
+        - "npx" 
+        - "playwright"
+        - "test"
+        - "--workers=1"
+        - "$ITEM"
+      restartPolicy: Never
