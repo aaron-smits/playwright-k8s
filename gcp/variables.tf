@@ -34,7 +34,7 @@ variable "primary_ip_cidr" {
 variable "max_pods_per_node" {
   description = "Max pods per node should be half of the number of node IP addresses, up to a max of 110"
   type        = number
-  default     = 110
+  default     = 8
 }
 
 variable "cluster_ipv4_cidr_block" {
@@ -99,19 +99,19 @@ variable "wi_iam_roles_list" {
 variable "enable_private_endpoint" {
   description = "When true public access to cluster (master) endpoint is disabled.  When false, it can be accessed both publicly and privately."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "enable_private_nodes" {
   description = "Nodes only have private IPs and communicate to master via private networking."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "master_ipv4_cidr_block" {
   description = "CIDR of the master network.  Range must not overlap with any other ranges in use within the cluster's network.  Left blank for a public GKE endpoint but needs to be specified if provisioning a private GKE endpoint."
   type        = string
-  default     = ""
+  default     = "192.168.69.0/28"
 }
 
 variable "iap_proxy_ip_cidr" {
@@ -198,13 +198,13 @@ variable "filestore_csi_driver_enabled" {
 variable "horizontal_pod_autoscaling_disabled" {
   description = "When enabled, allows increase/decrease number of replica pods based on resource usage of existing pods."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "http_lb_disabled" {
   description = "When enabled, a controller will be installed to coordinate applying load balancing configuration changes to your GCP project."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "confidential_nodes_enabled" {
@@ -309,20 +309,20 @@ variable "nap_profile" {
 
   validation {
     condition     = contains(["BALANCED", "OPTIMIZE_UTILIZATION"], var.nap_profile)
-    error_message = "Accepted values are BALANCED or OPTIMIZE_UTILIZATION"
+    error_message = "Accepted values are BALANCED or  "
   }
 }
 
 variable "nap_max_cpu" {
   description = "Maximum number of cores in the cluster."
   type        = number
-  default     = 2 * 300
+  default     = 300
 }
 
 variable "nap_max_memory" {
   description = "Maximum number of gigabytes of memory in the cluster."
   type        = number
-  default     = 8 * 300
+  default     = 2400
 }
 
 
@@ -392,7 +392,7 @@ variable "location_policy" {
 variable "auto_upgrade" {
   description = "Enables auto-upgrade of cluster.  Needs to be 'true' unless 'channel' is UNSPECIFIED"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "oauth_scopes" {

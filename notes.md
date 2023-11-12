@@ -7,7 +7,7 @@ https://kubernetes.io/blog/2021/04/19/introducing-indexed-jobs/
 https://github.com/Neutrollized/free-tier-gke
 https://cloud.google.com/compute/docs/instances/preemptible
 https://hub.docker.com/repository/docker/aaronsmits/pw-k8s/general
-
+https://developer.hashicorp.com/terraform/tutorials/kubernetes/gke
 
 # Playwright Kubernetes
 To Do:

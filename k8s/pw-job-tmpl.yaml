@@ -5,7 +5,6 @@ metadata:
   labels:
     jobgroup: pw-tests
 spec:
-  ttlSecondsAfterFinished: 10
   template:
     metadata:
       name: pw-test-$INDEX

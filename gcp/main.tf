@@ -25,7 +25,6 @@ resource "google_container_cluster" "primary" {
 
   name     = var.gke_cluster_name
   location = var.regional ? var.region : var.zone
-
   # Can be single or multi-zone, as
   # https://www.terraform.io/docs/providers/google/r/container_cluster.html#node_locations
   node_locations = var.node_locations
@@ -110,10 +109,11 @@ resource "google_container_cluster" "primary" {
   }
 
   monitoring_config {
+   
     managed_prometheus {
       enabled = var.enable_managed_prometheus
     }
-
+    
     dynamic "advanced_datapath_observability_config" {
       for_each = var.dataplane_v2_enabled ? [1] : []
       content {
@@ -122,7 +122,7 @@ resource "google_container_cluster" "primary" {
       }
     }
   }
-
+  
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
@@ -141,14 +141,18 @@ resource "google_container_cluster" "primary" {
 
       resource_limits {
         resource_type = "cpu"
+        minimum = 1
         maximum       = var.nap_max_cpu
       }
 
       resource_limits {
         resource_type = "memory"
+        minimum = 4
         maximum       = var.nap_max_memory
       }
     }
+
+
   }
 
   addons_config {
