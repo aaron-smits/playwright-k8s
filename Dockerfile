@@ -13,5 +13,3 @@ COPY playwright.config.ts /app/
 
 # Get the needed libraries to run Playwright
 RUN npm install
-
-CMD ["npx", "playwright", "test", "repeat-each=100"]
