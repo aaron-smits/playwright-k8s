@@ -2,8 +2,9 @@
 # provider variables
 #-----------------------
 variable "project_id" {
-  description = "core-trees-404818"
+  description = "Project ID"
   type        = string
+  default = "core-trees-404818"
 }
 
 variable "region" {
@@ -127,6 +128,7 @@ variable "iap_proxy_ip_cidr" {
 variable "gke_cluster_name" {
   description = "Name of the GKE cluster."
   type        = string
+  default = "pw-k8s"
 }
 
 variable "regional" {
@@ -196,13 +198,13 @@ variable "filestore_csi_driver_enabled" {
 variable "horizontal_pod_autoscaling_disabled" {
   description = "When enabled, allows increase/decrease number of replica pods based on resource usage of existing pods."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "http_lb_disabled" {
   description = "When enabled, a controller will be installed to coordinate applying load balancing configuration changes to your GCP project."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "confidential_nodes_enabled" {
@@ -297,7 +299,7 @@ variable "enable_dpv2_hubble" {
 variable "enable_cluster_autoscaling" {
   description = "Enable node auto-provisioning."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "nap_profile" {
@@ -314,13 +316,13 @@ variable "nap_profile" {
 variable "nap_max_cpu" {
   description = "Maximum number of cores in the cluster."
   type        = number
-  default     = 4
+  default     = 2 * 300
 }
 
 variable "nap_max_memory" {
   description = "Maximum number of gigabytes of memory in the cluster."
   type        = number
-  default     = 8
+  default     = 8 * 300
 }
 
 
@@ -337,7 +339,7 @@ variable "gke_nodepool_name" {
 variable "machine_type" {
   description = "Machine type of nodes in node pool."
   type        = string
-  default     = "e2-small"
+  default     = "e2-medium"
 }
 
 variable "preemptible" {
@@ -349,7 +351,7 @@ variable "preemptible" {
 variable "disk_size_gb" {
   description = "The default disk size the nodes are given.  100G is probably too much for a test cluster, so you can change it if you'd like.  Don't set it too low though as disk I/O is also tied to disk size."
   type        = number
-  default     = 100
+  default     = 10
 }
 
 variable "image_type" {
@@ -373,7 +375,7 @@ variable "min_nodes" {
 variable "max_nodes" {
   description = "Max number of nodes per zone in node pool"
   type        = number
-  default     = 3
+  default     = 300
 }
 
 variable "location_policy" {
