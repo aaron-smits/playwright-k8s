@@ -270,29 +270,6 @@ variable "log_config" {
 
 
 #----------------------------------------------
-# GKE Dataplane V2 (Cilium)
-#----------------------------------------------
-
-variable "dataplane_v2_enabled" {
-  description = "If enabled, it uses a dataplane that harnesses the power of eBPF and Cilium.  Cannot be set to true if network_policy_enabled is also set to true."
-  type        = bool
-  default     = false
-}
-
-variable "enable_dpv2_metrics" {
-  description = "Enable GKE Dataplane V2 metrics"
-  type        = bool
-  default     = false
-}
-
-variable "enable_dpv2_hubble" {
-  description = "Enable GKE Dataplane V2 observability.  Note: enabling this will also provision an internal network load balancer"
-  type        = bool
-  default     = false
-}
-
-
-#----------------------------------------------
 # GKE Cluster - Node Auto-provisioning (NAP)
 #----------------------------------------------
 

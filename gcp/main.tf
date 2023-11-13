@@ -1,25 +1,3 @@
-# https://www.terraform.io/docs/providers/google/r/container_cluster.html#example-usage-with-a-separately-managed-node-pool-recommended-
-
-# workaround to destroy Hubble relay resource that is not managed by Terraform
-# resource "null_resource" "hubble_relay_destroy" {
-#   triggers = {
-#     project_id   = var.project_id
-#     cluster_name = var.gke_cluster_name
-#     location     = var.zone
-#   }
-
-#   provisioner "local-exec" {
-#     when    = destroy
-#     command = "gcloud container clusters update ${self.triggers.cluster_name} --project=${self.triggers.project_id} --location=${self.triggers.location} --dataplane-v2-observability-mode=DISABLED"
-#   }
-
-#   # ensure this runs before cluster destruction begins
-#   depends_on = [
-#     google_container_node_pool.primary_preemptible_nodes
-#   ]
-# }
-
-
 resource "google_container_cluster" "primary" {
   provider = google-beta
 
@@ -91,14 +69,9 @@ resource "google_container_cluster" "primary" {
     }
   }
 
-  # GKE Dataplane V2 is generally available as of GKE version 1.20.6-gke.700
-  # https://cloud.google.com/kubernetes-engine/docs/how-to/dataplane-v2#create-cluster
   network_policy {
     enabled = var.network_policy_enabled
   }
-
-  datapath_provider = var.dataplane_v2_enabled ? "ADVANCED_DATAPATH" : "DATAPATH_PROVIDER_UNSPECIFIED"
-
 
   release_channel {
     channel = var.channel
@@ -107,21 +80,6 @@ resource "google_container_cluster" "primary" {
   maintenance_policy {
     daily_maintenance_window {
       start_time = "03:00"
-    }
-  }
-
-  monitoring_config {
-   
-    managed_prometheus {
-      enabled = var.enable_managed_prometheus
-    }
-    
-    dynamic "advanced_datapath_observability_config" {
-      for_each = var.dataplane_v2_enabled ? [1] : []
-      content {
-        enable_metrics = var.enable_dpv2_metrics
-        relay_mode     = var.enable_dpv2_hubble ? "INTERNAL_VPC_LB" : "DISABLED"
-      }
     }
   }
   
