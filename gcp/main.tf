@@ -41,6 +41,7 @@ resource "google_container_cluster" "primary" {
     for_each = var.confidential_nodes_enabled ? [1] : []
     content {
       machine_type = var.machine_type
+      disk_size_gb = var.disk_size_gb
 
       labels = {
         mesh_id = "proj-${var.project_id}"
@@ -141,7 +142,7 @@ resource "google_container_cluster" "primary" {
 
       resource_limits {
         resource_type = "cpu"
-        minimum = 1
+        minimum = 2
         maximum       = var.nap_max_cpu
       }
 

@@ -16,7 +16,7 @@ variable "region" {
 variable "zone" {
   description = "Zone to deploy GCP resources"
   type        = string
-  default     = "us-central1-c"
+  default     = "us-central1"
 }
 
 
@@ -34,7 +34,7 @@ variable "primary_ip_cidr" {
 variable "max_pods_per_node" {
   description = "Max pods per node should be half of the number of node IP addresses, up to a max of 110"
   type        = number
-  default     = 8
+  default     = 110
 }
 
 variable "cluster_ipv4_cidr_block" {
@@ -99,7 +99,7 @@ variable "wi_iam_roles_list" {
 variable "enable_private_endpoint" {
   description = "When true public access to cluster (master) endpoint is disabled.  When false, it can be accessed both publicly and privately."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "enable_private_nodes" {
@@ -134,13 +134,13 @@ variable "gke_cluster_name" {
 variable "regional" {
   description = "Is this cluster regional or zonal? Regional clusters aren't covered by Google's Always Free tier."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "node_locations" {
   description = "List of zones in which the cluster's nodes are located. For zonal cluster, this can be omitted."
   type        = list(string)
-  default     = []
+  default     = ["us-central1-a", "us-central1-b", "us-central1-c", "us-central1-f"]
 }
 
 variable "enable_shielded_nodes" {
@@ -169,7 +169,7 @@ variable "networking_mode" {
 variable "master_authorized_network_cidr" {
   description = "External networks that can access the Kubernetes cluster master through HTTPS.  The default is to allow all (not recommended for production)."
   type        = string
-  default     = "0.0.0.0/0"
+  default     = "50.223.50.163/32"
 }
 
 variable "network_policy_enabled" {
@@ -316,7 +316,7 @@ variable "nap_profile" {
 variable "nap_max_cpu" {
   description = "Maximum number of cores in the cluster."
   type        = number
-  default     = 300
+  default     = 32
 }
 
 variable "nap_max_memory" {
@@ -375,7 +375,7 @@ variable "min_nodes" {
 variable "max_nodes" {
   description = "Max number of nodes per zone in node pool"
   type        = number
-  default     = 300
+  default     = 8
 }
 
 variable "location_policy" {

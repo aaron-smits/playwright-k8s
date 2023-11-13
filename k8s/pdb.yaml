@@ -1,0 +1,9 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: pw-pdb
+spec:
+  minAvailable: 100
+  selector:
+    matchLabels:
+      job-name: pw
