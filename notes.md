@@ -16,11 +16,16 @@ https://argoproj.github.io/argo-workflows/
 
 To Do:
 Research:
+- [ ] Argo Workflows for Kubernetes
+- [ ] Calculate the cost of running the cluster and the tests
 - [ ] Add a test that fails
 - [ ] Add a test that fails and is flaky
 - [ ] Helm for working with all the yaml files
+- [ ] pulling images from private GCR
+- [ ] Understand how to limit storage to stay below quota
 Features:
 - [ ] Created shared volume for test results
+- [ ] Create custom playwright reporter with option to upload to storage bucket and write json to a database
 - [ ] Create a test publish job that pushes the test results to a web server
 - [ ] Store test results in a storage bucket
 - [ ] Create a frontend to display the test results over time
@@ -32,7 +37,12 @@ Write Up:
   - Docker
   - Playwright
   - Kubernetes
-# Commands that are useful
+- [ ] Write up the process of running the tests in parallel
+  - Playwright
+  - Kubernetes
+
+
+# Commands 
 
 ```bash
 # Add observability to the cluster
@@ -46,5 +56,4 @@ gcloud container clusters get-credentials pw-k8s --region=us-central1-c
 
 # Create a job
 kubectl apply -f job.yaml
-
 ```

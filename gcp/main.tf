@@ -1,23 +1,23 @@
 # https://www.terraform.io/docs/providers/google/r/container_cluster.html#example-usage-with-a-separately-managed-node-pool-recommended-
 
 # workaround to destroy Hubble relay resource that is not managed by Terraform
-resource "null_resource" "hubble_relay_destroy" {
-  triggers = {
-    project_id   = var.project_id
-    cluster_name = var.gke_cluster_name
-    location     = var.zone
-  }
+# resource "null_resource" "hubble_relay_destroy" {
+#   triggers = {
+#     project_id   = var.project_id
+#     cluster_name = var.gke_cluster_name
+#     location     = var.zone
+#   }
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "gcloud container clusters update ${self.triggers.cluster_name} --project=${self.triggers.project_id} --location=${self.triggers.location} --dataplane-v2-observability-mode=DISABLED"
-  }
+#   provisioner "local-exec" {
+#     when    = destroy
+#     command = "gcloud container clusters update ${self.triggers.cluster_name} --project=${self.triggers.project_id} --location=${self.triggers.location} --dataplane-v2-observability-mode=DISABLED"
+#   }
 
-  # ensure this runs before cluster destruction begins
-  depends_on = [
-    google_container_node_pool.primary_preemptible_nodes
-  ]
-}
+#   # ensure this runs before cluster destruction begins
+#   depends_on = [
+#     google_container_node_pool.primary_preemptible_nodes
+#   ]
+# }
 
 
 resource "google_container_cluster" "primary" {
@@ -42,6 +42,7 @@ resource "google_container_cluster" "primary" {
     content {
       machine_type = var.machine_type
       disk_size_gb = var.disk_size_gb
+      disk_type = var.disk_type
 
       labels = {
         mesh_id = "proj-${var.project_id}"

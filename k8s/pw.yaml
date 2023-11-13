@@ -12,26 +12,25 @@ spec:
   template:
     spec:
       restartPolicy: Never
-      volumes:
-        - name: test-results-volume
-          persistentVolumeClaim:
-            claimName: test-results-pvc
+      # volumes:
+      #   - name: test-results-volume
+      #     persistentVolumeClaim:
+      #       claimName: test-results-pvc
       containers:
         - name: pw-worker
           image: aaronsmits/pw-k8s:latest
-          resources:
-            requests:
-              ephemeral-storage: "1Gi"
-            limits:
-              ephemeral-storage: "10Gi"
-          volumeMounts:
-            - mountPath: "/blob-reports"
-              name: test-results-volume
+          # resources:
+          #   requests:
+          #     ephemeral-storage: "1Gi"
+          #   limits:
+          #     ephemeral-storage: "10Gi"
+          # volumeMounts:
+          #   - mountPath: "/blob-reports"
+          #     name: test-results-volume
           command:
             - "bash"
             - "-c"
             - |
               shard=$((JOB_COMPLETION_INDEX+1))
-              npx playwright test --workers=1 --repeat-each=10 --shard=$shard/10 && \
-              cp -r /blob-reports /data/test-results
+              npx playwright test --workers=1 --repeat-each=10 --shard=$shard/10
 

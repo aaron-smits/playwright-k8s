@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.6.3",
-  "serial": 418,
+  "serial": 417,
   "lineage": "1cab9a4b-41a7-693c-9806-e79a25339abe",
   "outputs": {},
   "resources": [
@@ -769,6 +769,33 @@
           },
           "sensitive_attributes": [],
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "null_resource",
+      "name": "hubble_relay_destroy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/null\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "5795405466452221371",
+            "triggers": {
+              "cluster_name": "pw-k8s",
+              "location": "us-central1",
+              "project_id": "core-trees-404818"
+            }
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "google_compute_network.k8s_vpc",
+            "google_compute_subnetwork.k8s_subnet",
+            "google_container_cluster.primary",
+            "google_container_node_pool.primary_preemptible_nodes",
+            "google_service_account.gke_sa"
+          ]
         }
       ]
     }

@@ -305,24 +305,24 @@ variable "enable_cluster_autoscaling" {
 variable "nap_profile" {
   description = "Profile for how the cluster autoscaler should optimize for resource utilization."
   type        = string
-  default     = "OPTIMIZE_UTILIZATION"
+  default     = "BALANCED"
 
   validation {
     condition     = contains(["BALANCED", "OPTIMIZE_UTILIZATION"], var.nap_profile)
-    error_message = "Accepted values are BALANCED or  "
+    error_message = "Accepted values are BALANCED or OPTIMIZE_UTILIZATION"
   }
 }
 
 variable "nap_max_cpu" {
   description = "Maximum number of cores in the cluster."
   type        = number
-  default     = 32
+  default     = 128
 }
 
 variable "nap_max_memory" {
   description = "Maximum number of gigabytes of memory in the cluster."
   type        = number
-  default     = 2400
+  default     = 512
 }
 
 
@@ -333,7 +333,7 @@ variable "nap_max_memory" {
 variable "gke_nodepool_name" {
   description = "Name of node pool."
   type        = string
-  default     = "preempt-pool"
+  default     = "pw-k8s-np"
 }
 
 variable "machine_type" {
@@ -352,6 +352,12 @@ variable "disk_size_gb" {
   description = "The default disk size the nodes are given.  100G is probably too much for a test cluster, so you can change it if you'd like.  Don't set it too low though as disk I/O is also tied to disk size."
   type        = number
   default     = 10
+}
+
+variable "disk_type" {
+  description = "The default disk type the nodes are given."
+  type        = string
+  default     = "pd-standard"
 }
 
 variable "image_type" {
@@ -375,7 +381,7 @@ variable "min_nodes" {
 variable "max_nodes" {
   description = "Max number of nodes per zone in node pool"
   type        = number
-  default     = 8
+  default     = 100
 }
 
 variable "location_policy" {
@@ -412,11 +418,11 @@ variable "taint" {
   description = "Used to specify node taints (if any). List of maps whose values are strings."
   type        = list(map(string))
   default = [
-    #    {
-    #      key    = "node.cilium.io/agent-not-ready"
-    #      value  = "true"
-    #      effect = "NO_SCHEDULE"
-    #    }
+       {
+         key    = "node.cilium.io/agent-not-ready"
+         value  = "true"
+         effect = "NO_SCHEDULE"
+       }
   ]
 }
 
