@@ -14,17 +14,18 @@ https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/cre
 Argo Workflows for Kubernetes
 https://argoproj.github.io/argo-workflows/
 
+AWS EKS Tutorial with Terrform Modules
+https://antonputra.com/amazon/create-eks-cluster-using-terraform-modules/#create-eks-using-terraform
+https://aws.amazon.com/blogs/compute/scaling-your-applications-faster-with-ec2-auto-scaling-warm-pools
+
 To Do:
 Research:
-- [ ] Argo Workflows for Kubernetes
-- [ ] Calculate the cost of running the cluster and the tests
-- [ ] Add a test that fails
-- [ ] Add a test that fails and is flaky
-- [ ] Helm for working with all the yaml files
-- [ ] pulling images from private GCR
-- [ ] Understand how to limit storage to stay below quota
+- [x] Argo Workflows for Kubernetes
+- [x] Calculate the cost of running the cluster and the tests
+- [ ] pulling images from private registry
 Features:
-- [ ] Created shared volume for test results
+- [ ] Created shared volume for test results/artifacts
+  - [ ] do this with Argo
 - [ ] Create custom playwright reporter with option to upload to storage bucket and write json to a database
 - [ ] Create a test publish job that pushes the test results to a web server
 - [ ] Store test results in a storage bucket
@@ -33,6 +34,7 @@ Write Up:
 - [ ] Write up the process of creating the cluster
   - Terraform
   - GKE
+  - EKS
 - [ ] Write up the process of creating the job
   - Docker
   - Playwright
@@ -40,6 +42,12 @@ Write Up:
 - [ ] Write up the process of running the tests in parallel
   - Playwright
   - Kubernetes
+- [ ] Write up the process of creating an Argo workflow
+  - Kubernetes
+  - Argo
+  - Argo Server
+  - Argo CLI
+  - Argo UI
 
 
 # Commands 
