@@ -9,7 +9,11 @@ Demo of how to run playwright tests in a kubernetes cluster. Work in progress
 
 To do
 - Reporting/Report merging via Playwright
+- Pushing report to storage bucket and publishing it to private webpage
 - Ready-to-use Terraform projects for GCP, AWS, and Azure
+   - Private endpoint option
+   - Size options
+   - Resource options 
 - Alternative method for batch jobs using deployments
 - More complete documentation of processes and a references section
 
