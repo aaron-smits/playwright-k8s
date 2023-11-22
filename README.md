@@ -223,4 +223,4 @@ argo submit -n argo --watch k8s/argo/pw.yaml
 ```
 
 # Issues, Suggestions, and Contributions
-Please let me know if you have any feedback or would like to contribute to this project. My aim is to assemble a solution for this using open source tools and make this setup accessible to anyone.
+Please let me know if you have any feedback or would like to contribute to this project. My aim is to assemble a solution for this using open source tools and make this setup accessible to anyone. Email: aaronsmitstc@gmail.com
