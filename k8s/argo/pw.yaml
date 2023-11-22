@@ -77,6 +77,6 @@ spec:
         requests:
           memory: "256Mi"
           cpu: "100m"
-      image: us-central1-docker.pkg.dev/core-trees-404818/pw-k8s/pw-k8s:latest
+      image: us-central1-docker.pkg.dev/core-trees-404818/pw-k8s/pw-k8s:latest # Replace with your own image
       command: ['npx']
       args: ['playwright', 'test', '{{inputs.parameters.test}}']
