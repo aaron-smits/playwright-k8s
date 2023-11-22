@@ -1,6 +1,6 @@
 # playwright-k8s
 
-Demo of how to run playwright tests in a kubernetes cluster
+Demo of how to run playwright tests in a kubernetes cluster. Work in progress
 
 - Autoscaling
 - Batch jobs with Argo Workflows
@@ -11,7 +11,7 @@ To do
 - Reporting/Report merging via Playwright
 - Ready-to-use Terraform projects for GCP, AWS, and Azure
 - Alternative method for batch jobs using deployments
-- Documentation of processes
+- More complete documentation of processes and a references section
 
 # Getting Started
 
