@@ -1,6 +1,6 @@
 # playwright-k8s
-
-Demo of how to run playwright tests in a kubernetes cluster. Work in progress
+Work in progress.
+Demo of how to run playwright tests in a kubernetes cluster.
 
 - Autoscaling
 - Batch jobs with Argo Workflows
