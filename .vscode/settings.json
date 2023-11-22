@@ -1,8 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json": [
-            "k8s/argo/**.yaml",
-            "file:///home/aaron/code/playwright-k8s/k8s/argo/ui-access.yaml"
-        ]
-    }
-}
