@@ -25,14 +25,14 @@ spec:
   #Generate a list of tests and indexes in JSON format
   - name: gen-test-list
     script:
-      image: aaronsmits/pw-k8s:latest
+      image: us-central1-docker.pkg.dev/core-trees-404818/pw-k8s/pw-k8s:latest
       command: [node]
       source: |
         const { exec } = require("child_process");
 
         const getTests = () => {
             return new Promise((resolve, reject) => {
-                exec("npx playwright test --repeat-each=10 --list", (error, stdout, stderr) => {
+                exec("npx playwright test --repeat-each=100 --list", (error, stdout, stderr) => {
                 if (error) {
                     reject(error);
                     return;
@@ -77,6 +77,6 @@ spec:
         requests:
           memory: "256Mi"
           cpu: "100m"
-      image: aaronsmits/pw-k8s:latest
+      image: us-central1-docker.pkg.dev/core-trees-404818/pw-k8s/pw-k8s:latest
       command: ['npx']
       args: ['playwright', 'test', '{{inputs.parameters.test}}']

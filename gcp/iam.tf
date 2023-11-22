@@ -26,3 +26,4 @@ resource "google_project_iam_member" "wi_gsa_iam_member" {
   role    = var.wi_iam_roles_list[count.index]
   member  = "serviceAccount:${google_service_account.wi_gsa.email}"
 }
+

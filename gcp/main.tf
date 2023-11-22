@@ -1,6 +1,5 @@
 resource "google_container_cluster" "primary" {
   provider = google-beta
-
   name     = var.gke_cluster_name
   location = var.regional ? var.region : var.zone
   # Can be single or multi-zone, as
@@ -9,7 +8,7 @@ resource "google_container_cluster" "primary" {
 
   confidential_nodes {
     enabled = var.confidential_nodes_enabled
-  }
+  } 
 
   # this node_config block is for the "default pool", which we are not using as per recommendations:
   # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster#node_config
@@ -27,7 +26,6 @@ resource "google_container_cluster" "primary" {
       }
     }
   }
-
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
@@ -62,12 +60,12 @@ resource "google_container_cluster" "primary" {
     }
   }
 
-  master_authorized_networks_config {
-    cidr_blocks {
-      cidr_block   = var.enable_private_endpoint ? var.iap_proxy_ip_cidr : var.master_authorized_network_cidr
-      display_name = "allowed-cidr"
-    }
-  }
+  # master_authorized_networks_config {
+  #   cidr_blocks {
+  #     cidr_block   = var.enable_private_endpoint ? var.iap_proxy_ip_cidr : var.master_authorized_network_cidr
+  #     display_name = "allowed-cidr"
+  #   }
+  # }
 
   network_policy {
     enabled = var.network_policy_enabled
@@ -90,7 +88,7 @@ resource "google_container_cluster" "primary" {
   binary_authorization {
     evaluation_mode = var.binary_auth_enabled ? "PROJECT_SINGLETON_POLICY_ENFORCE" : "DISABLED"
   }
-
+  
   # https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler#autoscaling_profiles
   # NOTE: this creates an additional node pool
   dynamic "cluster_autoscaling" {
@@ -101,15 +99,22 @@ resource "google_container_cluster" "primary" {
 
       resource_limits {
         resource_type = "cpu"
-        minimum = 2
+        minimum = 1
         maximum       = var.nap_max_cpu
       }
 
       resource_limits {
         resource_type = "memory"
-        minimum = 4
+        minimum = 2
         maximum       = var.nap_max_memory
       }
+      
+      auto_provisioning_defaults {
+        disk_size = 10
+        disk_type = "pd-standard"
+        image_type = "COS_CONTAINERD"
+      }
+
     }
 
 

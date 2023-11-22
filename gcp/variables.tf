@@ -166,11 +166,11 @@ variable "networking_mode" {
   }
 }
 
-variable "master_authorized_network_cidr" {
-  description = "External networks that can access the Kubernetes cluster master through HTTPS.  The default is to allow all (not recommended for production)."
-  type        = string
-  default     = "50.223.50.163/32"
-}
+# variable "master_authorized_network_cidr" {
+#   description = "External networks that can access the Kubernetes cluster master through HTTPS.  The default is to allow all (not recommended for production)."
+#   type        = string
+#   default     = "50.223.50.163/32"
+# }
 
 variable "network_policy_enabled" {
   description = "If enabled, allows GKE's network policy enforcement to control communication between cluster's pods and services.  Cannot be set to true if dataplane_v2_enabled is also set to true."
@@ -316,13 +316,13 @@ variable "gke_nodepool_name" {
 variable "machine_type" {
   description = "Machine type of nodes in node pool."
   type        = string
-  default     = "e2-medium"
+  default     = "e2-small"
 }
 
 variable "preemptible" {
   description = "Preemptible nodes are Compute Engine instances that last up to 24 hours and provide no availability guarantees, but are priced lower."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "disk_size_gb" {

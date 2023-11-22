@@ -22,7 +22,7 @@ To Do:
 Research:
 - [x] Argo Workflows for Kubernetes
 - [x] Calculate the cost of running the cluster and the tests
-- [ ] pulling images from private registry
+- [x] pulling images from private registry
 Features:
 - [ ] Created shared volume for test results/artifacts
   - [ ] do this with Argo
@@ -31,10 +31,9 @@ Features:
 - [ ] Store test results in a storage bucket
 - [ ] Create a frontend to display the test results over time
 Write Up:
-- [ ] Write up the process of creating the cluster
-  - Terraform
-  - GKE
-  - EKS
+- [x] Write up the process of creating the cluster
+  - [x] GKE
+  - [] EKS
 - [ ] Write up the process of creating the job
   - Docker
   - Playwright
@@ -48,20 +47,3 @@ Write Up:
   - Argo Server
   - Argo CLI
   - Argo UI
-
-
-# Commands 
-
-```bash
-# Add observability to the cluster
-gcloud container clusters update pw-k8s --region=us-central1 --monitoring=SYSTEM 
-
-# Set up kubernetes dashboard
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
-
-# Generate credentials for kubectl with gcloud
-gcloud container clusters get-credentials pw-k8s --region=us-central1-c
-
-# Create a job
-kubectl apply -f job.yaml
-```
