@@ -39,7 +39,7 @@ variable "max_pods_per_node" {
 
 variable "cluster_ipv4_cidr_block" {
   description = "Secondary CIDR for pods.  /24 node IPs will allow max 252 nodes * 256 pod IPs = 64,512 total IPs, so pod CIDR needs to be > than that so needs to be /16 "
-  type        = string
+  type        = string 
   default     = "10.0.0.0/16"
 }
 
@@ -165,12 +165,6 @@ variable "networking_mode" {
     error_message = "Accepted values are VPC_NATIVE or ROUTES"
   }
 }
-
-# variable "master_authorized_network_cidr" {
-#   description = "External networks that can access the Kubernetes cluster master through HTTPS.  The default is to allow all (not recommended for production)."
-#   type        = string
-#   default     = "50.223.50.163/32"
-# }
 
 variable "network_policy_enabled" {
   description = "If enabled, allows GKE's network policy enforcement to control communication between cluster's pods and services.  Cannot be set to true if dataplane_v2_enabled is also set to true."
